@@ -3,6 +3,8 @@
 starting to work with: 
 (creating virtual env)
 - python -m venv ./venv/
+(for mac)
+- source venv/bin/activate 
 
 (installing requirements)
 - pip install -r requirements.txt

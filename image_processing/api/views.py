@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework import response, status
-from .serializers import RGBImageSerializer
+from .serializers import RGBImageSerializer, CombinedImageSerializer
 from image_processing.models import RGBImages, CombinedImage
 
 from ..editing import ImageEditor
@@ -11,6 +11,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 
 from image_processing.editing import ImageEditor
+
 
 class RGBImageUpload(APIView):
     parser_classes = [MultiPartParser, FormParser]
@@ -29,12 +30,27 @@ class RGBImageUpload(APIView):
             return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class RGBImageGet(generics.ListAPIView):
+class RGBImageList(generics.ListAPIView):
     serializer_class = RGBImageSerializer
 
     def get_queryset(self):
         rgb_images = RGBImages.objects.all()
         return rgb_images
+
+
+class CombinedImageList(generics.ListAPIView):
+    serializer_class = CombinedImageSerializer
+
+    def get_queryset(self):
+        combined_images = CombinedImage.objects.all()
+        return combined_images
+
+
+class CombinedImageGet(generics.RetrieveAPIView):
+    queryset = CombinedImage.objects.all()
+    serializer_class = CombinedImageSerializer
+    lookup_field = 'from_images'
+
 
 
 @receiver(post_save, sender=RGBImages)
@@ -43,6 +59,7 @@ def rgb_images_create_handler(sender, instance, created, *args, **kwargs):
         print(instance.image_r)
         image_editor = ImageEditor(image_r=instance.image_r,
                                    image_g=instance.image_g,
-                                   image_b=instance.image_b)
+                                   image_b=instance.image_b,
+                                   from_images=instance)
         image_editor.combine_images()
 

@@ -17,3 +17,8 @@ class RGBImageSerializer(ModelSerializer):
                         }
 
 
+class CombinedImageSerializer(ModelSerializer):
+    class Meta:
+        model = CombinedImage
+        fields = '__all__'
+

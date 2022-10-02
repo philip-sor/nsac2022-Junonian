@@ -47,20 +47,20 @@
      image_b: *image*
      metadata: *metadata* (optional)
      }
-    #### django should scrap those images from a form(needs to be tested)
+     ##### django should scrap those images from a form(needs to be tested)
 
   - getting r, g, b images: 
     - localhost/api/rgb_list/
-    ##### returns a json dict with lists of r,g,b image urls 
+     ##### returns a json dict with lists of r,g,b image urls 
     
   - getting combined images:
     - localhost/api/combined_list/
-    ##### returns a json dict with all combined photoes
+     ##### returns a json dict with all combined photoes
     
     - localhost/api/combined_get/{from_images_id}
-    ##### {from_images_id} is id of an object with r, g, b images from which combined photo was made.
+     ##### {from_images_id} is id of an object with r, g, b images from which combined photo was made.
     
-    ##### returns specified combined image
+     ##### returns specified combined image
     
     
     

@@ -38,10 +38,10 @@
 
 # urls:
   - admin page:
-    localhost/admin
+    - localhost/admin
   
   - adding images (r, g, b):
-    localhost/api/rgb_add/
+    - localhost/api/rgb_add/
     {image_r: *image*
      image_g: *image*
      image_b: *image*
@@ -50,14 +50,14 @@
     #### django should scrap those images from a form(needs to be tested)
 
   - getting r, g, b images: 
-    localhost/api/rgb_list/
+    - localhost/api/rgb_list/
     ##### returns a json dict with lists of r,g,b image urls 
     
   - getting combined images:
-    localhost/api/combined_list/
+    - localhost/api/combined_list/
     ##### returns a json dict with all combined photoes
     
-    localhost/api/combined_get/{from_images_id}
+    - localhost/api/combined_get/{from_images_id}
     ##### {from_images_id} is id of an object with r, g, b images from which combined photo was made.
     
     ##### returns specified combined image
